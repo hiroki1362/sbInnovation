@@ -22,18 +22,41 @@ h1 {
 }
 
 p {
-	font-size: 15px;
+	font-size: 13px;
 	margin-top: 8px;
 	margin-bottom: 0px;
 }
 
+label {
+	width: 100%;
+	margin: 20px auto 5px auto;
+	display: block;
+}
+
+picture {
+	display: block;
+	margin: 0 auto;
+	width: 640px;
+}
+
+picture img {
+	width: 100%;
+}
+
+#content {
+	width: 700px;
+	margin: 0 auto;
+}
+
+
+
 #resultShowArea {
 	display: block;
-	width: 800px;
-	height: 100px;
+	width: 100%;
+	height: 60px;
 	padding: 10px;
 	margin: 0 auto;
-	border: 1px solid #ccc;
+	border: 1px solid #777;
 	overflow: scroll;
 }
 
