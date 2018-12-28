@@ -1,0 +1,44 @@
+/*style*/
+html, body {
+	color: #000000;
+	background: #ffffff;
+}
+
+body {
+	margin:0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+section {
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	width: 100%;
+	text-align: center;
+}
+
+p {
+	font-size: 15px;
+	margin-top: 8px;
+	margin-bottom: 0px;
+}
+
+#resultShowArea {
+	display: block;
+	width: 800px;
+	height: 100px;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	overflow: scroll;
+}
+
+#parotBtn {
+	display: block;
+	margin: 20px auto;
+	width: 300px;
+}
