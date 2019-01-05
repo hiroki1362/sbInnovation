@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="UTF-8">
+    <title>WebSpeechAPIデモ</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="./css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+  </head>
+
+  <body>
+    <section>
+      <h1 class="text-center h1">Your virtual teacher</h1>
+      <div id="content">
+        <picture>
+          <source src="./img/test.jpg">
+          <img src="./img/test.jpg">
+        </picture>
+        <label>■Log:</label>
+        <div id="resultShowArea">
+        </div>
+        <input type="button" id="parotBtn" value="START!!" onclick="micStart();">
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src='./socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="./js/recognition.js"></script>
+    <script type="text/javascript" src="./js/socket.js"></script>
+  </body>
+
+</html>
