@@ -1,0 +1,21 @@
+{
+  "name": "sb_innovation",
+  "version": "1.0.0",
+  "description": "For Softbank Innovation program",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "Hiroki Fujioka (infodex.co)",
+  "license": "ISC",
+  "dependencies": {
+    "npm": "^6.5.0",
+    "socket.io": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

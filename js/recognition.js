@@ -8,13 +8,16 @@ utterThis.lang = "en-US";
 recognition.interimResults = false;
 recognition.continuous = true;
 
-
 recognition.onresult = function(event) {
 	if (event.results.length > 0 && !voice.speaking) {
 		isSpeeching = true;
 		console.log(event.results);
 		let recognize = event.results[event.results.length - 1][0].transcript;
 		addSpeechText(recognize, 0);
+
+		//WebSocketに送信
+		sendMessage(recognize);
+		
 		onSpeech(recognize);		
 	}
 }
