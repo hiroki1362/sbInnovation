@@ -1,15 +1,30 @@
 const recognition = new webkitSpeechRecognition();
-const utterThis = new SpeechSynthesisUtterance();
-const voice = window.speechSynthesis;
+//const utterThis = new SpeechSynthesisUtterance();
+//const voice = window.speechSynthesis;
 const textArea = $("#resultShowArea");
+const speechAudio = $("#speechAudio");
+
+const AWS_REGION = "ap-northeast-1";
+const ACCESS_KEY = "AKIAJZS36AMPSNUU5CFQ";
+const SECRET_ACCESS_KEY = "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";
+
+AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_ACCESS_KEY, region: AWS_REGION});
+let polly = new AWS.Polly({apiVersion: '2016-06-10'});
+let pollyParams = {
+        OutputFormat: "mp3",
+        SampleRate: "8000",
+        Text: '',
+        TextType: "text",
+        VoiceId: "Joanna"
+    };
 
 recognition.lang = 'en-US';
-utterThis.lang = "en-US";
+//utterThis.lang = "en-US";
 recognition.interimResults = false;
 recognition.continuous = true;
 
 recognition.onresult = function(event) {
-	if (event.results.length > 0 && !voice.speaking) {
+	if (event.results.length > 0) {
 		isSpeeching = true;
 		console.log(event.results);
 		let recognize = event.results[event.results.length - 1][0].transcript;
@@ -28,13 +43,20 @@ function micStart() {
 
 }
 
-function onSpeech(speechText) {
-	let voiceList = voice.getVoices();
-	utterThis.voice = voiceList[32];
-	console.log(voiceList);
-	utterThis.text = speechText;
-	voice.speak(utterThis);
-	addSpeechText(speechText, 1);
+//AWS Pollyで発話
+function onSpeech(speechText) {	
+	pollyParams.Text = speechText;
+	polly.synthesizeSpeech(pollyParams, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(data);
+			let uInt8Array = new Uint8Array(data.AudioStream);
+			let blob = new Blob([uInt8Array.buffer]);
+			speechAudio.attr("src", URL.createObjectURL(blob));
+			speechAudio[0].play();
+		}
+	});
 }
 
 
