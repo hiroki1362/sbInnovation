@@ -17,9 +17,10 @@ var server = require('http').createServer(function(req, res) {
 		output = fs.readFileSync('./index.html','utf-8');
 	} else if (ext == "html" && req.url === "/teacher.html") {
 		output = fs.readFileSync('./teacher.html', 'utf-8');
-	} else if (ext == "jpg" || ext == "gif" || ext == "png") {
+	} else if (ext == "jpg" || ext == "gif" || ext == "png" || ext == "pmx") {
 		console.log(path);
-		output = fs.readFileSync(path, "binary");
+		modifyPath = decodeURIComponent(path);
+		output = fs.readFileSync(modifyPath, "binary");
 		res.end(output, "binary");
 	} else {
 		console.log(path);

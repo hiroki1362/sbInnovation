@@ -32,7 +32,7 @@ function initCharacter() {
 
 
 	let loader = new THREE.MMDLoader();
-	let modelFile = "./img/cocon/cocon v101.pmx";
+	let modelFile = "./img/cocon/cocon_v101.pmx";
 
 	let onProgress = function(xhr) {
 		console.log("onProgress: " + xhr);
