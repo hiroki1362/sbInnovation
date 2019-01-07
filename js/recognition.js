@@ -5,8 +5,8 @@ const textArea = $("#resultShowArea");
 const speechAudio = $("#speechAudio");
 
 const AWS_REGION = "ap-northeast-1";
-const ACCESS_KEY = "AKIAJZS36AMPSNUU5CFQ";
-const SECRET_ACCESS_KEY = "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";
+const ACCESS_KEY = "";
+const SECRET_ACCESS_KEY = "";
 
 AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_ACCESS_KEY, region: AWS_REGION});
 let polly = new AWS.Polly({apiVersion: '2016-06-10'});
