@@ -14,6 +14,8 @@ let pollyParams = {
         VoiceId: "Joanna"
     };
 
+ let isSpeeching = false;
+
 $(function() {
 
 	textArea = $("#resultShowArea");
@@ -28,7 +30,6 @@ $(function() {
 		initSpeechRecognize();
 		initSocket();
 
-		console.log(data);
 		AWS_REGION = data.region;
 		ACCESS_KEY = data.accessKey;
 		SECRET_ACCESS_KEY = data.secretKey;
@@ -43,6 +44,9 @@ $(function() {
 		console.log("complete");
 	});
 
+	speechAudio.on("ended", function() {
+		isSpeeching = false;
+	});
 });
 
 //Chromeのテキスト化処理
@@ -52,8 +56,7 @@ function initSpeechRecognize() {
 	recognition.interimResults = false;
 	recognition.continuous = true;
 	recognition.onresult = function(event) {
-		if (event.results.length > 0) {
-			isSpeeching = true;
+		if (event.results.length > 0 && !isSpeeching) {
 			console.log(event.results);
 			let recognize = event.results[event.results.length - 1][0].transcript;
 
@@ -98,14 +101,8 @@ function onSpeech(speechText) {
 			let uInt8Array = new Uint8Array(data.AudioStream);
 			let blob = new Blob([uInt8Array.buffer]);
 			speechAudio.attr("src", URL.createObjectURL(blob));
-
-			let promise = speechAudio[0].play();
-			if (promise !== null){
-			    promise.catch((e) => {
-			    	console.log(e);
-			    	speechAudio[0].play(); 
-			    })
-			}
+			isSpeeching = true;
+			speechAudio[0].play();
 		}
 	});
 }

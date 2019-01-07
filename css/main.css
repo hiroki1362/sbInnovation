@@ -43,12 +43,17 @@ picture img {
 	width: 100%;
 }
 
+#characterCanvas {
+	width: 640px;
+	height: 430px;
+	display: block;
+	margin: 0 auto;
+}
+
 #content {
 	width: 700px;
 	margin: 0 auto;
 }
-
-
 
 #resultShowArea {
 	display: block;

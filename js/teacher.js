@@ -7,7 +7,6 @@ recognition.continuous = true;
 
 recognition.onresult = function(event) {
 	if (event.results.length > 0) {
-		isSpeeching = true;
 		console.log(event.results);
 		let recognize = event.results[event.results.length - 1][0].transcript;
 
@@ -44,7 +43,7 @@ socketio.on("disconnect", function(){
 function getMessage(data) {
 	console.log(data)
 	if (data.from == "student") {
-		addSpeechText(data.message, 1);
+		addSpeechText(data.message, 0);
 	}
 }
 
