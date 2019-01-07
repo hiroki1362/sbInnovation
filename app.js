@@ -40,7 +40,7 @@ io.sockets.on("connection", function (socket) {
 	});
 
 	socket.on("publish", function(data) {
-		io.sockets.emit("publish", {value: data.value});
+		io.sockets.emit("publish", {value: data});
 	});
 
 	socket.on("disconnect", function() {
