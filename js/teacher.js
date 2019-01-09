@@ -24,7 +24,9 @@ function micStart() {
 }
 
 function onSend() {
-	sendMessage($("#actionEnter").val());
+	let message = $("#actionEnter").val();
+	sendMessage(message);
+	addSpeechText(message, 1);	
 }
 
 var socketio = io();
