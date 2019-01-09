@@ -66,7 +66,7 @@ function addSpeechText(text, who) {
 	if (who == 0) {
 		recP = $("</p>").text("生徒：" + text + ".");
 	} else {
-		recP = $("</p>").html("先生（あなた）：" + text + ".");
+		recP = $("</p>").html("先生（あなた）：" + text);
 	}
     $("#resultShowArea").append(recP).scrollTop($("#resultShowArea")[0].scrollHeight);
 }

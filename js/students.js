@@ -114,7 +114,7 @@ function addSpeechText(text, who) {
 	if (who == 0) {
 		recP = $("</p>").text("あなた：" + text + ".");
 	} else {
-		recP = $("</p>").html("先生：" + text + ".");
+		recP = $("</p>").html("先生：" + text);
 	}
 
     $("#resultShowArea").append(recP).scrollTop($("#resultShowArea")[0].scrollHeight);
