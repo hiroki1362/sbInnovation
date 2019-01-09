@@ -1,11 +1,31 @@
 let mesh, camera, scene, renderer, effect;
+let characterMmd;
+let loader;
 let canvasWidth = 640;
 let canvasHeight = 430;
 let helper, ikHelper, physicsHelper;
 let clock = new THREE.Clock();
 
 const modelFile = "./img/cocon/cocon_v101.pmx";
-const motionFile = ["./img/motion/test.vmd"];
+
+const motionFile = [
+	"./img/motion/initStand_temp.vmd",
+	"./img/motion/initStand_temp2.vmd",
+	"./img/motion/anger1.vmd",
+	"./img/motion/anger2.vmd",
+	"./img/motion/apologize2.vmd",
+	"./img/motion/disappointed2.vmd",
+	"./img/motion/gossip1.vmd",
+	"./img/motion/gossip2.vmd",
+	"./img/motion/happy1.vmd",
+	"./img/motion/happy2.vmd",
+	"./img/motion/negotiate1.vmd",
+	"./img/motion/negotiate2.vmd",
+	"./img/motion/praise1.vmd",
+	"./img/motion/praise2.vmd",
+	"./img/motion/secret1.vmd",
+	"./img/motion/secret2.vmd"
+];
 
 $(function() {
 	initCharacter();
@@ -41,7 +61,7 @@ function initCharacter() {
 		afterglow: 2.0
 	});
 
-	let loader = new THREE.MMDLoader();
+	loader = new THREE.MMDLoader();
 
 	let onProgress = function(xhr) {
 		console.log("onProgress: " + xhr);
@@ -53,10 +73,11 @@ function initCharacter() {
 
 	loader.loadWithAnimation(
 		modelFile,
-		motionFile,
+		motionFile[0],
 		function(mmd) {
+			characterMmd = mmd;
 			mesh = mmd.mesh;
-			mesh.position.set(0, -6.5, 1);
+			mesh.position.set(0, -8.5, 1);
 			mesh.rotation.set(-0.2, 0, 0);
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
@@ -80,6 +101,20 @@ function initCharacter() {
 			
 			let controls = new THREE.OrbitControls(camera, renderer.domElement);
 		}, onProgress, onError);
+}
+
+function changeAnimation() {
+	let motionNum = Math.floor(Math.random() * motionFile.length);
+	loader.loadAnimation(
+		motionFile[motionNum],
+		mesh,
+		function(newAnim) {
+			helper.remove(mesh);
+			helper.add(mesh, {
+				animation: newAnim,
+				physics: true
+			});
+		});
 }
 
 //アニメーション

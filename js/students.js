@@ -47,6 +47,8 @@ $(function() {
 	speechAudio.on("ended", function() {
 		isSpeeching = false;
 	});
+
+	$("#characterCanvas").on("click", changeAnimation);
 });
 
 //Chromeのテキスト化処理

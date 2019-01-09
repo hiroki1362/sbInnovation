@@ -21,7 +21,10 @@ recognition.onresult = function(event) {
 function micStart() {
 	recognition.start();
 	$("#parotBtn").prop("disabled", true);
+}
 
+function onSend() {
+	sendMessage($("#actionEnter").val());
 }
 
 var socketio = io();
