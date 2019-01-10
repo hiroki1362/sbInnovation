@@ -46,9 +46,10 @@ $(function() {
 
 	speechAudio.on("ended", function() {
 		isSpeeching = false;
+		changeAnimation(0);
 	});
 
-	$("#characterCanvas").on("click", changeAnimation);
+	//$("#characterCanvas").on("click", changeAnimation);
 });
 
 //Chromeのテキスト化処理
@@ -105,6 +106,7 @@ function onSpeech(speechText) {
 			speechAudio.attr("src", URL.createObjectURL(blob));
 			isSpeeching = true;
 			speechAudio[0].play();
+			changeAnimation(1);
 		}
 	});
 }

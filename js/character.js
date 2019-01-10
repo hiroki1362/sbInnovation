@@ -8,24 +8,15 @@ let clock = new THREE.Clock();
 
 const modelFile = "./img/cocon/cocon_v101.pmx";
 
-const motionFile = [
-	"./img/motion/initStand_temp.vmd",
-	"./img/motion/initStand_temp2.vmd",
-	"./img/motion/anger1.vmd",
-	"./img/motion/anger2.vmd",
-	"./img/motion/apologize2.vmd",
-	"./img/motion/disappointed2.vmd",
-	"./img/motion/gossip1.vmd",
-	"./img/motion/gossip2.vmd",
-	"./img/motion/happy1.vmd",
-	"./img/motion/happy2.vmd",
-	"./img/motion/negotiate1.vmd",
-	"./img/motion/negotiate2.vmd",
-	"./img/motion/praise1.vmd",
-	"./img/motion/praise2.vmd",
-	"./img/motion/secret1.vmd",
-	"./img/motion/secret2.vmd"
+const defaultMotionFile = [
+	"./img/motion/defaultMotion1.vmd",
+	"./img/motion/defaultMotion2.vmd"
 ];
+
+const speakMotionFile = [
+	"./img/motion/speakMotion1.vmd",
+	"./img/motion/speakMotion2.vmd"
+]
 
 $(function() {
 	initCharacter();
@@ -73,12 +64,12 @@ function initCharacter() {
 
 	loader.loadWithAnimation(
 		modelFile,
-		motionFile[0],
+		defaultMotionFile[Math.floor(Math.random() * defaultMotionFile.length)],
 		function(mmd) {
 			characterMmd = mmd;
 			mesh = mmd.mesh;
-			mesh.position.set(0, -8.5, 1);
-			mesh.rotation.set(-0.2, 0, 0);
+			mesh.position.set(0, 4, -3);
+			mesh.rotation.set(0.2, 0, 0);
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
 			scene.add(mesh);
@@ -99,14 +90,20 @@ function initCharacter() {
 			//helper.setAnimation(mesh);
 			//helper.setPhysics(mesh);
 			
-			let controls = new THREE.OrbitControls(camera, renderer.domElement);
+			//let controls = new THREE.OrbitControls(camera, renderer.domElement);
 		}, onProgress, onError);
 }
 
-function changeAnimation() {
-	let motionNum = Math.floor(Math.random() * motionFile.length);
+function changeAnimation(state) {
+	let motionNum = Math.floor(Math.random() * speakMotionFile.length);
+	let motionUrl = ""
+	if (state == 0) {
+		motionUrl = defaultMotionFile[motionNum];
+	} else {
+		motionUrl = speakMotionFile[motionNum];
+	}
 	loader.loadAnimation(
-		motionFile[motionNum],
+		motionUrl[motionNum],
 		mesh,
 		function(newAnim) {
 			helper.remove(mesh);
