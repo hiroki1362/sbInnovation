@@ -103,7 +103,7 @@ function changeAnimation(state) {
 		motionUrl = speakMotionFile[motionNum];
 	}
 	loader.loadAnimation(
-		motionUrl[motionNum],
+		motionUrl,
 		mesh,
 		function(newAnim) {
 			helper.remove(mesh);
