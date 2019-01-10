@@ -1,10 +1,12 @@
 let mesh, camera, scene, renderer, effect;
-let characterMmd;
 let loader;
 let canvasWidth = 640;
 let canvasHeight = 430;
 let helper, ikHelper, physicsHelper;
 let clock = new THREE.Clock();
+
+let defaultCharacter;
+let speakCharacter;
 
 const modelFile = "./img/cocon/cocon_v101.pmx";
 
@@ -66,8 +68,9 @@ function initCharacter() {
 		modelFile,
 		defaultMotionFile[Math.floor(Math.random() * defaultMotionFile.length)],
 		function(mmd) {
-			characterMmd = mmd;
+			console.log(mmd);
 			mesh = mmd.mesh;
+			defaultCharacter = mesh;
 			mesh.position.set(0, 4, -3);
 			mesh.rotation.set(0.2, 0, 0);
 			mesh.castShadow = true;
@@ -92,16 +95,48 @@ function initCharacter() {
 			
 			//let controls = new THREE.OrbitControls(camera, renderer.domElement);
 		}, onProgress, onError);
+
+	loader.loadWithAnimation(
+		modelFile,
+		speakMotionFile[Math.floor(Math.random() * defaultMotionFile.length)],
+		function(mmd) {
+			mesh = mmd.mesh;
+			speakCharacter = mesh;
+			mesh.position.set(0, 4, -3);
+			mesh.rotation.set(0.2, 0, 0);
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			scene.add(mesh);
+
+			helper.add(mesh, {
+				animation: mmd.animation,
+				physics: true
+			});
+
+			ikHelper = helper.objects.get(mesh).ikSolver.createHelper();
+			ikHelper.visible = false;
+			scene.add(ikHelper);
+
+			physicsHelper = helper.objects.get(mesh).physics.createHelper();
+			physicsHelper.visible = false;
+
+			speakCharacter.visible = false;
+		});
 }
 
 function changeAnimation(state) {
 	let motionNum = Math.floor(Math.random() * speakMotionFile.length);
 	let motionUrl = ""
 	if (state == 0) {
-		motionUrl = defaultMotionFile[motionNum];
+		//motionUrl = defaultMotionFile[motionNum];
+		defaultCharacter.visible = true;
+		speakCharacter.visible = false;
 	} else {
-		motionUrl = speakMotionFile[motionNum];
+		defaultCharacter.visible = false;
+		speakCharacter.visible = true;
+		//motionUrl = speakMotionFile[motionNum];
 	}
+	/*
 	loader.loadAnimation(
 		motionUrl,
 		mesh,
@@ -111,7 +146,7 @@ function changeAnimation(state) {
 				animation: newAnim,
 				physics: true
 			});
-		});
+		});*/
 }
 
 //アニメーション
