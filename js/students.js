@@ -16,6 +16,8 @@ let pollyParams = {
 
  let isSpeeching = false;
 
+const BIT = 1024;
+
 $(function() {
 
 	textArea = $("#resultShowArea");
@@ -33,7 +35,14 @@ $(function() {
 		AWS_REGION = data.region;
 		ACCESS_KEY = data.accessKey;
 		SECRET_ACCESS_KEY = data.secretKey;
-		AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_ACCESS_KEY, region: AWS_REGION});
+
+		let phrase = data.phrase;
+		let rsaKey = cryptico.generateRSAKey(phrase, BIT);
+		
+		let accessKey = cryptico.decrypt(ACCESS_KEY, rsaKey);
+		let secretKey = cryptico.decrypt(SECRET_ACCESS_KEY, rsaKey);
+
+		AWS.config.update({accessKeyId: accessKey.plaintext, secretAccessKey: secretKey.plaintext, region: AWS_REGION});
 		polly = new AWS.Polly({apiVersion: '2016-06-10'});
 
 	})
