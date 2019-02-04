@@ -53,7 +53,6 @@ function setParameter() {
 
 	ACCESS_KEY = $("#accessKey").val();
 	SECRET_ACCESS_KEY = $("#secretKey").val();
-	console.log(ACCESS_KEY);
 
 	/*
 	let phrase = data.phrase;
