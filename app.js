@@ -24,7 +24,7 @@ var server = require('http').createServer(function(req, res) {
 		output = fs.readFileSync('./index.html','utf-8');
 	} else if (ext == "html" && req.url === "/teacher.html") {
 		output = fs.readFileSync('./teacher.html', 'utf-8');
-	} else if (req.url === "/getParameter.html") {
+	} else if (req.url === "./getParameter.html") {
 		output = config;
 	} else if (ext == "jpg" || ext == "gif" || ext == "png" || ext == "pmx" || ext == "vmd") {
 		console.log(path);
