@@ -7,16 +7,26 @@ var server = require('http').createServer(function(req, res) {
 	var ext = tmp[tmp.length - 1];
  	var path = '.' + url;
 
+
  	var config = {
  		region: process.env.REGION,
  		accessKey: process.env.ACCESS_KEY,
  		secretKey: process.env.SECRET_KEY,
  		phrase: process.env.PHRASE
  	}
+ 	
+	/*
+	var config = {
+ 		region: "aaaa",
+ 		accessKey: "abbb",
+ 		secretKey: "addd",
+ 		phrase: "process.env.PHRASE"
+ 	}*/
 
 	res.writeHead(200, {'Content-Type': getType(req.url)});
 
 	var output = null;
+	console.log(req.url);
 
 	if (ext == "/") {
 		output = fs.readFileSync('./index.html','utf-8');
@@ -24,8 +34,8 @@ var server = require('http').createServer(function(req, res) {
 		output = fs.readFileSync('./index.html','utf-8');
 	} else if (ext == "html" && req.url === "/teacher.html") {
 		output = fs.readFileSync('./teacher.html', 'utf-8');
-	} else if (req.url === "./getParameter.html") {
-		output = config;
+	} else if (req.url === "/getParameter?key=4dhd95t6iwme") {
+		output = JSON.stringify(config);
 	} else if (ext == "jpg" || ext == "gif" || ext == "png" || ext == "pmx" || ext == "vmd") {
 		console.log(path);
 		modifyPath = decodeURIComponent(path);
