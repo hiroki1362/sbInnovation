@@ -7,14 +7,13 @@ var server = require('http').createServer(function(req, res) {
 	var ext = tmp[tmp.length - 1];
  	var path = '.' + url;
 
-
  	var config = {
  		region: process.env.REGION,
  		accessKey: process.env.ACCESS_KEY,
  		secretKey: process.env.SECRET_KEY,
  		phrase: process.env.PHRASE
  	}
- 	
+
 	/*
 	var config = {
  		region: "aaaa",

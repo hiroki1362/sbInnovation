@@ -28,23 +28,9 @@ $(function() {
 		dataType: "json"
 	})
 	.done(function(data) {
-
 		initSpeechRecognize();
 		initSocket();
-
 		AWS_REGION = data.region;
-		ACCESS_KEY = data.accessKey;
-		SECRET_ACCESS_KEY = data.secretKey;
-
-		let phrase = data.phrase;
-		let rsaKey = cryptico.generateRSAKey(phrase, BIT);
-		
-		let accessKey = cryptico.decrypt(ACCESS_KEY, rsaKey);
-		let secretKey = cryptico.decrypt(SECRET_ACCESS_KEY, rsaKey);
-
-		AWS.config.update({accessKeyId: accessKey.plaintext, secretAccessKey: secretKey.plaintext, region: AWS_REGION});
-		polly = new AWS.Polly({apiVersion: '2016-06-10'});
-
 	})
 	.fail(function() {
 		console.log("error");
@@ -60,6 +46,28 @@ $(function() {
 
 	//$("#characterCanvas").on("click", changeAnimation);
 });
+
+function setParameter() {
+	$("#keyInput").css("display", "none");
+	$("#content").css("display", "block");
+
+	ACCESS_KEY = $("#accessKey").val();
+	SECRET_ACCESS_KEY = $("#secretKey").val();
+	console.log(ACCESS_KEY);
+
+	/*
+	let phrase = data.phrase;
+	let rsaKey = cryptico.generateRSAKey(phrase, BIT);
+	
+	let accessKey = cryptico.decrypt(ACCESS_KEY, rsaKey);
+	let secretKey = cryptico.decrypt(SECRET_ACCESS_KEY, rsaKey);
+	*/
+
+	//AWS.config.update({accessKeyId: accessKey.plaintext, secretAccessKey: secretKey.plaintext, region: AWS_REGION});
+
+	AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_ACCESS_KEY, region: AWS_REGION});
+	polly = new AWS.Polly({apiVersion: '2016-06-10'});
+}
 
 //Chromeのテキスト化処理
 function initSpeechRecognize() {

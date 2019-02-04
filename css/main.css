@@ -43,6 +43,24 @@ picture img {
 	width: 100%;
 }
 
+#keyInput label{
+	margin-top: 10px;
+}
+
+#accessKey, #secretKey {
+	display: block;
+	width: 490px;
+	height: 22px;
+	font-size: 12px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #8f8f8f;
+}
+
+#secretKey {
+	margin-bottom: 40px;
+}
+
 #characterCanvas {
 	width: 640px;
 	height: 430px;
@@ -50,9 +68,13 @@ picture img {
 	margin: 0 auto;
 }
 
-#content {
+#content, #keyInput {
 	width: 700px;
 	margin: 0 auto;
+}
+
+#content {
+	display: none;
 }
 
 #resultShowArea {
@@ -65,7 +87,7 @@ picture img {
 	overflow: scroll;
 }
 
-#parotBtn {
+#parotBtn, #setParamBtn {
 	display: block;
 	margin: 20px auto;
 	width: 300px;

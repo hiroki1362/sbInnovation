@@ -12,8 +12,14 @@
   <body>
     <section>
       <h1 class="text-center h1">Your virtual teacher</h1>
+      <div id="keyInput">
+        <label>アクセスキー</label>
+        <input type="text" id="accessKey" placeholder="Enter your Access Key." />
+        <label>シークレットキー</label>
+        <input type="text" id="secretKey" placeholder="Enter your Secret Key." />
+        <input type="button" id="setParamBtn" value="SET PARAMETER!!" onclick="setParameter();">
+      </div>
       <div id="content">
-        <p>ごめんなさい、今はしゃべりません。諸々の事情でそう設定しています。</p>
         <!--<picture>
           <source src="./img/test.jpg">
           <img src="./img/test.jpg">
